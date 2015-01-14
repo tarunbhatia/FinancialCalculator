@@ -54,9 +54,9 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment implements
             View.OnClickListener {
-        TextView firstOption = null;
+        TextView firstOption, secondOption = null;
         public PlaceholderFragment() {
-            firstOption = null;
+            firstOption = secondOption= null;
         }
 
         @Override
@@ -71,6 +71,9 @@ public class MainActivity extends ActionBarActivity {
             super.onActivityCreated(savedInstanceBundle);
             firstOption = (TextView) getActivity().findViewById(R.id.MainActivityFirstTextView);
             firstOption.setOnClickListener(this);
+
+            secondOption = (TextView) getActivity().findViewById(R.id.MainActivitySecondTextView);
+            secondOption.setOnClickListener(this);
         }
 
 
@@ -87,6 +90,13 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(intent);
                     break;
 
+                case R.id.MainActivitySecondImageView:
+                case R.id.MainActivitySecondTextSubView:
+                case R.id.MainActivitySecondTextView:
+
+                    Intent intent2 = new Intent(getActivity().getApplicationContext(),SimpleMortgageCalculatorActivity.class);
+                    startActivity(intent2);
+;
                 default:
                     break;
             }

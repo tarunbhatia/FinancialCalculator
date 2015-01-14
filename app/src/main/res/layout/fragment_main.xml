@@ -61,5 +61,51 @@
                 android:visibility="visible"
                 android:singleLine="false" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/MainActivitySecondImageView"
+                android:layout_column="1"
+                android:clickable="true"
+                android:contentDescription="@string/MainActivityFirstImageDesc" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/simple_mortgage"
+                android:id="@+id/MainActivitySecondTextView"
+                android:layout_column="2"
+                android:clickable="true"
+                android:onClick="@string/simple_mortgage"
+                android:visibility="visible" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/simple_mortgage_desc"
+                android:id="@+id/MainActivitySecondTextSubView"
+                android:layout_column="2"
+                android:clickable="true"
+                android:visibility="visible"
+                android:singleLine="false" />
+        </TableRow>
     </TableLayout>
 </RelativeLayout>

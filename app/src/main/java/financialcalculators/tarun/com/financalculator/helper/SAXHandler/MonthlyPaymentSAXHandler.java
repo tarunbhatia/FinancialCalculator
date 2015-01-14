@@ -1,5 +1,7 @@
 package financialcalculators.tarun.com.financalculator.helper.SAXHandler;
 
+import android.util.Log;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -12,7 +14,9 @@ import financialcalculators.tarun.com.financalculator.helper.MonthlyPaymentItem;
 public class MonthlyPaymentSAXHandler extends DefaultHandler {
     private StringBuilder characters = new StringBuilder();
     private MonthlyPaymentItem paymentItem = new MonthlyPaymentItem();
-    boolean fifteen, thirty, fiveArm = false;
+    boolean fifteen, fiveArm = false;
+    boolean thirty = true;
+    int count = 0;
 
     public MonthlyPaymentItem getPaymentItem(){
         return paymentItem;
@@ -21,21 +25,7 @@ public class MonthlyPaymentSAXHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName,
                              Attributes attributes) {
         characters.delete(0, characters.length());
-        if (localName.equals("payment loanType")) {
-            if (getValue().equals("thirtyYearFixed")) {
-                thirty = true;
-                fifteen = false;
-                fiveArm = false;
-            } else if (getValue().equals("fifteenYearFixed")) {
-                fifteen = true;
-                thirty = false;
-                fiveArm = false;
-            } else if (getValue().equals("fiveOneARM")) {
-                fiveArm = true;
-                fifteen = false;
-                thirty = false;
-            }
-        }
+
     }
 
     public void endElement(String namespaceURI, String localName, String qName) {
@@ -48,36 +38,57 @@ public class MonthlyPaymentSAXHandler extends DefaultHandler {
         } else if (localName.equals("code")) {
             paymentItem.setCode(Integer.parseInt(getValue()));
         } else if (localName.equals("rate")) {
-            if (thirty == true) {
-                paymentItem.setThirtyYearRate(Integer.parseInt(getValue()));
-            } else if (fifteen == true) {
-                paymentItem.setFifteenYearRate(Integer.parseInt(getValue()));
-            } else if (fiveArm == true) {
-                paymentItem.setFiveOneArmRate(Integer.parseInt(getValue()));
+            count++;
+            //The case where we don't get Monthly Mortgage Insurance (PMI)
+            if(count == 2 && thirty){
+                thirty = false;
+                fifteen = true;
+                fiveArm = false;
+            } else if(count == 3 && fifteen){
+                fifteen = false;
+                fiveArm = true;
+                thirty = true;
+            }
+            if (thirty) {
+                paymentItem.setThirtyYearRate(Float.parseFloat(getValue()));
+            } else if (fifteen) {
+                paymentItem.setFifteenYearRate(Float.parseFloat(getValue()));
+            } else if (fiveArm) {
+                paymentItem.setFiveOneArmRate(Float.parseFloat(getValue()));
             }
         } else if (localName.equals("monthlyPrincipalAndInterest")) {
-            if (thirty == true) {
+            if (thirty) {
                 paymentItem.setThirtyYearMonthlyPAndI(Integer
                         .parseInt(getValue()));
-            } else if (fifteen == true) {
+                Log.v("TEST APP", "30 Year Monthly P&I: "+ paymentItem.getThirtyYearMonthlyPAndI());
+            } else if (fifteen) {
                 paymentItem.setFifteenYearMonthlyPAndI(Integer
                         .parseInt(getValue()));
-            } else if (fiveArm == true) {
+            } else if (fiveArm) {
                 paymentItem.setFiveOneArmMonthlyPAndI(Integer
                         .parseInt(getValue()));
             }
         } else if (localName.equals("monthlyMortgageInsurance")) {
-            if (thirty == true) {
+            if (thirty) {
                 paymentItem.setThirtyYearPMI(Integer.parseInt(getValue()));
-            } else if (fifteen == true) {
+                fifteen = true;
+                thirty = false;
+            } else if (fifteen) {
                 paymentItem.setFifteenYearPMI(Integer.parseInt(getValue()));
-            } else if (fiveArm == true) {
+                fifteen = false;
+                fiveArm = true;
+            } else if (fiveArm) {
                 paymentItem.setFiveOneArmPMI(Integer.parseInt(getValue()));
+                thirty = true;
+                fifteen = false;
+                fiveArm = false;
             }
         } else if (localName.equals("monthlyPropertyTaxes")) {
             paymentItem.setMonthlyPropTaxes(Integer.parseInt(getValue()));
         } else if (localName.equals("monthlyHazardInsurance")) {
             paymentItem.setMonthlyHazardInsurance(Integer.parseInt(getValue()));
+        } else if(localName.equals("downPayment")){
+            paymentItem.setDownPayment(Integer.parseInt(getValue()));
         }
     }
 

@@ -9,13 +9,13 @@ public class MonthlyPaymentItem {
     private int downPercentage;
     private int zipCode;
     private int code;
-    private int thirtyYearRate;
+    private float thirtyYearRate;
     private int thirtyYearMonthlyPAndI;
     private int thirtyYearPMI;
-    private int fifteenYearRate;
+    private float fifteenYearRate;
     private int fifteenYearMonthlyPAndI;
     private int fifteenYearPMI;
-    private int fiveOneArmRate;
+    private float fiveOneArmRate;
     private int fiveOneArmMonthlyPAndI;
     private int fiveOneArmPMI;
     private int monthlyPropTaxes;
@@ -90,11 +90,11 @@ public class MonthlyPaymentItem {
         this.zipCode = zipCode;
     }
 
-    public int getThirtyYearRate() {
+    public float getThirtyYearRate() {
         return thirtyYearRate;
     }
 
-    public void setThirtyYearRate(int thirtyYearRate) {
+    public void setThirtyYearRate(float thirtyYearRate) {
         this.thirtyYearRate = thirtyYearRate;
     }
 
@@ -122,11 +122,11 @@ public class MonthlyPaymentItem {
         this.thirtyYearPMI = thirtyYearPMI;
     }
 
-    public int getFifteenYearRate() {
+    public float getFifteenYearRate() {
         return fifteenYearRate;
     }
 
-    public void setFifteenYearRate(int fifteenYearRate) {
+    public void setFifteenYearRate(float fifteenYearRate) {
         this.fifteenYearRate = fifteenYearRate;
     }
 
@@ -146,11 +146,11 @@ public class MonthlyPaymentItem {
         this.fifteenYearPMI = fifteenYearPMI;
     }
 
-    public int getFiveOneArmRate() {
+    public float getFiveOneArmRate() {
         return fiveOneArmRate;
     }
 
-    public void setFiveOneArmRate(int fiveOneArmRate) {
+    public void setFiveOneArmRate(float fiveOneArmRate) {
         this.fiveOneArmRate = fiveOneArmRate;
     }
 

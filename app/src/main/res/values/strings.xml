@@ -6,5 +6,16 @@
     <string name="action_settings">Settings</string>
     <string name="simple_calculator">Simple Calculator</string>
     <string name="simple_calculator_desc">A Simple Calculator</string>
+    <string name="simple_mortgage">Simple Mortgage Calculator</string>
+    <string name="simple_mortgage_desc">A Simple Mortgage Calculator</string>
     <string name="MainActivityFirstImageDesc">Image View</string>
+    <string name="BaseMortgageAmount">Base Price</string>
+    <string name="BaseMortgageAmountDesc">Required: Base price of your property</string>
+    <string name="DollarsDown">Dollar Down</string>
+    <string name="DollarsDownDesc">Optional: Percentage to put down (20% default, if left empty) </string>
+    <string name="PercentageDollarsDown">% Down</string>
+    <string name="ZipCode">Zip Code</string>
+    <string name="ZipCodeDesc">Optional: Helps get most accurate rates</string>
+    <string name="MortgageResult">Result</string>
+    <string name="empty_string" />
 </resources>
