@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Financial Calculator</string>
+    <string name="app_name">Financial Calculators</string>
     <string name="hello_world">Hello world!</string>
+    <string name="action_home">Home</string>
     <string name="action_settings">Settings</string>
     <string name="simple_calculator">Simple Calculator</string>
     <string name="simple_calculator_desc">A Simple Calculator</string>
@@ -17,5 +18,10 @@
     <string name="ZipCode">Zip Code</string>
     <string name="ZipCodeDesc">Optional: Helps get most accurate rates</string>
     <string name="MortgageResult">Result</string>
-    <string name="empty_string" />
+    <string name="empty_string"></string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="supporting_libraries">Supporting Libraries</string>
+    <string name="supporting_libraries_desc">This app uses the following opensource libraries and we thank the contributors for their awesome efforts.</string>
+    <string name="zillow_copyRightDesc">Copyright Zillow, Inc., 2006-2014. Use is subject to Terms of Use</string>
+
 </resources>

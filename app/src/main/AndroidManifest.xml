@@ -24,15 +24,19 @@
             android:name=".SimpleCalculatorActivity"
             android:screenOrientation="nosensor"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/simple_calculator" >
         </activity>
-
         <activity
             android:name=".SimpleMortgageCalculatorActivity"
             android:screenOrientation="nosensor"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/simple_mortgage" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="nosensor"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/action_settings" >
         </activity>
     </application>
-
 </manifest>
