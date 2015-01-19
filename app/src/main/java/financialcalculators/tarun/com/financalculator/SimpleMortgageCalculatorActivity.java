@@ -30,7 +30,7 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container_simplemortcalc
-                            , new PlaceholderFragment())
+                            , new SimpleMortgageCalcFragment())
                     .commit();
         }
     }
@@ -57,14 +57,14 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class PlaceholderFragment extends Fragment implements
+    public static class SimpleMortgageCalcFragment extends Fragment implements
             View.OnClickListener {
         public MonthlyPaymentItem item = null;
 
 
         Button calcButton = null;
 
-        public PlaceholderFragment() {
+        public SimpleMortgageCalcFragment() {
             calcButton = null;
             item = new MonthlyPaymentItem();
         }
