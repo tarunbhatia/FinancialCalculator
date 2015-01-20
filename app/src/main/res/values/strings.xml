@@ -23,5 +23,13 @@
     <string name="supporting_libraries">Supporting Libraries</string>
     <string name="supporting_libraries_desc">This app uses the following opensource libraries and we thank the contributors for their awesome efforts.</string>
     <string name="zillow_copyRightDesc">Copyright Zillow, Inc., 2006-2014. Use is subject to Terms of Use</string>
+    <string name="zillow_error_code_one">Check to see if your url is properly formed: delimiters, character cases, etc.</string>
+    <string name="zillow_error_code_two">Check if you have provided a ZWSID in your API call. If yes, check if the ZWSID is keyed in correctly. If it still does not work, contact Zillow to get help with fixing your ZWSID.</string>
+    <string name="zillow_error_code_three">The Zillow Web Service is currently not available. Please come back later and try again.</string>
+    <string name="zillow_error_code_four">The Zillow Web Service is currently not available. Please come back later and try again.</string>
+    <string name="zillow_error_code_fivehundred">Make sure the price parameter is specified and is a valid integer.</string>
+    <string name="zillow_error_code_fivehundredone">Make sure the zip parameter is specified and is a valid five digit ZIP code.</string>
+    <string name="zillow_error_code_fivehundredtwo">Make sure the down or dollarsdown parameter is specified and is a valid integer.</string>
+    <string name="zillow_error_code_fivehundredthree">Zillow Mortgage Marketplace rate data is currently unavailable. Please come back later and try again.</string>
 
 </resources>

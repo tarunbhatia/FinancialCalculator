@@ -190,33 +190,51 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
             protected void onPostExecute(MonthlyPaymentItem result) {
                 TextView textView = (TextView) getActivity().findViewById(R.id.showResultTextView);
                 StringBuilder strBuilder = new StringBuilder();
-                strBuilder.append("$ Down Payment: $" + Integer.toString(item.getDownPayment()) + "\n");
-                strBuilder.append("30 Yr Fixed Rate: " + Float.toString(item.getThirtyYearRate()) + "%" + "\n");
-                if(item.getThirtyYearMonthlyPAndI()!=0){
-                    strBuilder.append("30 Yr Principal & Interest: $" + Integer.toString(item.getThirtyYearMonthlyPAndI()) + "\n");
-                }
-                if(item.getThirtyYearPMI()!=0){
-                    strBuilder.append("30 Yr PMI: $" + Float.toString(item.getThirtyYearPMI()) + "\n");
-                }
-                strBuilder.append("15 Yr Fixed Rate: " + Float.toString(item.getFifteenYearRate()) + "%" + "\n");
-                if(item.getFifteenYearMonthlyPAndI()!=0){
-                    strBuilder.append("15 Yr Principal & Interest: $" + Integer.toString(item.getFifteenYearMonthlyPAndI()) + "\n");
-                }
-                if(item.getFifteenYearPMI()!=0){
-                    strBuilder.append("15 Yr PMI: $" + Float.toString(item.getFifteenYearPMI()) + "\n");
-                }
-                strBuilder.append("5 Yr ARM Rate: " + Float.toString(item.getFiveOneArmRate()) + "%" + "\n");
-                if(item.getFiveOneArmMonthlyPAndI()!=0){
-                    strBuilder.append("5/1 Principal & Interest: $" + Integer.toString(item.getFiveOneArmMonthlyPAndI()) + "\n");
-                }
-                if(item.getFiveOneArmPMI()!=0){
-                    strBuilder.append("5 Yr ARM PMI: $" + Float.toString(item.getFiveOneArmPMI()) + "\n");
-                }
-                if(item.getMonthlyPropTaxes()!=0){
-                    strBuilder.append("Monthly Taxes: $"+Integer.toString(item.getMonthlyPropTaxes()) + "\n");
-                }
-                if(item.getMonthlyHazardInsurance()!=0){
-                    strBuilder.append("Monthly Hazard Ins.: $" + Integer.toString(item.getMonthlyHazardInsurance()) + "\n");
+                if(item.getCode()==0) {
+                    strBuilder.append("$ Down Payment: $").append(Integer.toString(item.getDownPayment())).append("\n");
+                    strBuilder.append("30 Yr Fixed Rate: ").append(Float.toString(item.getThirtyYearRate())).append("%").append("\n");
+                    if (item.getThirtyYearMonthlyPAndI() != 0) {
+                        strBuilder.append("30 Yr Principal & Interest: $").append(Integer.toString(item.getThirtyYearMonthlyPAndI())).append("\n");
+                    }
+                    if (item.getThirtyYearPMI() != 0) {
+                        strBuilder.append("30 Yr PMI: $").append(Float.toString(item.getThirtyYearPMI())).append("\n");
+                    }
+                    strBuilder.append("15 Yr Fixed Rate: ").append(Float.toString(item.getFifteenYearRate())).append("%").append("\n");
+                    if (item.getFifteenYearMonthlyPAndI() != 0) {
+                        strBuilder.append("15 Yr Principal & Interest: $").append(Integer.toString(item.getFifteenYearMonthlyPAndI())).append("\n");
+                    }
+                    if (item.getFifteenYearPMI() != 0) {
+                        strBuilder.append("15 Yr PMI: $").append(Float.toString(item.getFifteenYearPMI())).append("\n");
+                    }
+                    strBuilder.append("5 Yr ARM Rate: " ).append(Float.toString(item.getFiveOneArmRate())).append("%").append("\n");
+                    if (item.getFiveOneArmMonthlyPAndI() != 0) {
+                        strBuilder.append("5/1 Principal & Interest: $").append(Integer.toString(item.getFiveOneArmMonthlyPAndI())).append("\n");
+                    }
+                    if (item.getFiveOneArmPMI() != 0) {
+                        strBuilder.append("5 Yr ARM PMI: $").append(Float.toString(item.getFiveOneArmPMI())).append("\n");
+                    }
+                    if (item.getMonthlyPropTaxes() != 0) {
+                        strBuilder.append("Monthly Taxes: $").append(Integer.toString(item.getMonthlyPropTaxes())).append("\n");
+                    }
+                    if (item.getMonthlyHazardInsurance() != 0) {
+                        strBuilder.append("Monthly Hazard Ins.: $").append( Integer.toString(item.getMonthlyHazardInsurance())).append("\n");
+                    }
+                } else if(item.getCode()==1){
+                    strBuilder.append(R.string.zillow_error_code_one);
+                } else if(item.getCode()==2){
+                    strBuilder.append(R.string.zillow_error_code_two);
+                } else if(item.getCode()==3) {
+                    strBuilder.append(R.string.zillow_error_code_three);
+                } else if(item.getCode()==4) {
+                    strBuilder.append(R.string.zillow_error_code_four);
+                } else if(item.getCode()==500) {
+                    strBuilder.append(R.string.zillow_error_code_fivehundred);
+                } else if(item.getCode() == 501) {
+                    strBuilder.append(R.string.zillow_error_code_fivehundredone);
+                } else if(item.getCode() == 502) {
+                    strBuilder.append(R.string.zillow_error_code_fivehundredtwo);
+                } else if(item.getCode() == 503) {
+                    strBuilder.append(R.string.zillow_error_code_fivehundredthree);
                 }
                 textView.setText(strBuilder);
                 super.onPostExecute(result);
