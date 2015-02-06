@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.MessageFormat;
 
@@ -95,15 +96,17 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
+            TextView getBasePriceTextView = (TextView) getActivity().findViewById(
+                    R.id.editTextView);
+            TextView getDollarDownTextView = (TextView) getActivity().findViewById(R.id.editTextView2);
+            TextView getZipCodeTextView = (TextView) getActivity().findViewById(R.id.editTextView3);
+            try{
+
             switch (v.getId()) {
                 case R.id.calculateButton:
-                    TextView getBasePriceTextView = (TextView) getActivity().findViewById(
-                            R.id.editTextView);
+
                     //Refreshing the Item at each Calculate Button Click
                     item = new MonthlyPaymentItem();
-
-                    TextView getDollarDownTextView = (TextView) getActivity().findViewById(R.id.editTextView2);
-                    TextView getZipCodeTextView = (TextView) getActivity().findViewById(R.id.editTextView3);
 
                     if (getBasePriceTextView != null && !getBasePriceTextView.getText().toString().isEmpty()) {
                         String baseMortgagePrice = getBasePriceTextView.getText().toString();
@@ -119,7 +122,14 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
                     }
 
                     try {
-                        new ZillowURLParserHelper().execute(item);
+                        if(item.getPrice()>0){
+                            new ZillowURLParserHelper().execute(item);
+                        }
+                        else{
+                            Toast.makeText(getActivity(), "Please Enter Base Price to get started",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -127,6 +137,19 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
 
                 default:
                     break;
+            }
+            }catch(NumberFormatException e){
+                if (getBasePriceTextView != null && !getBasePriceTextView.getText().toString().isEmpty()) {
+                    getBasePriceTextView.setText("");
+                }
+                if (getDollarDownTextView != null && !getDollarDownTextView.getText().toString().isEmpty()) {
+                    getDollarDownTextView.setText("");
+                }
+                if (getZipCodeTextView != null && !getZipCodeTextView.getText().toString().isEmpty()) {
+                    getZipCodeTextView.setText("");
+                }
+                Toast.makeText(getActivity(), "Number should be less than 2,147,483,647",
+                        Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -157,7 +180,7 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
                             getMonthlyPaymentApi+="{1}";
                         }
                     }
-                    String url = "";
+                    String url;
                     if(!isDollarDownPresent && !isZipCodePresent){
                         url = MessageFormat.format(getMonthlyPaymentApi, new Object[]{
                                 Integer.toString(params[0].getPrice())});

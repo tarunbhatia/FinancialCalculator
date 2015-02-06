@@ -195,6 +195,26 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                         if (secondInput.getText().length() == 1) {
                             secondInput.setText("");
                         } else if (secondInput.getText().toString().endsWith(".0")) {
+                            if (secondInput.getText().length() == 4 && secondInput.getText().toString().contains("-")) {
+                                secondInput.setText("");
+                            }
+                            else {
+                                secondInput
+                                        .setText(secondInput
+                                                .getText()
+                                                .toString()
+                                                .substring(
+                                                        0,
+                                                        secondInput.getText().toString()
+                                                                .length() - 3));
+                            }
+                        }
+                        //If infinity, clean up the whole thing
+                        else if (secondInput.getText().toString().equalsIgnoreCase("Infinity")){
+                            secondInput.setText("");
+                        }
+
+                        else if (secondInput.getText().length() == 3 && secondInput.getText().toString().contains(".")) {
                             secondInput
                                     .setText(secondInput
                                             .getText()
@@ -202,9 +222,13 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                                             .substring(
                                                     0,
                                                     secondInput.getText().toString()
-                                                            .length() - 3));
-                        } else {
+                                                            .length() - 2));
+                        }
+                        else if (secondInput.getText().length() == 2 && secondInput.getText().toString().contains("-")) {
+                            secondInput.setText("");
+                        }
 
+                    else {
                             secondInput
                                     .setText(secondInput
                                             .getText()

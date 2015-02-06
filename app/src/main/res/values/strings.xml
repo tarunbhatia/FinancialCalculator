@@ -13,10 +13,10 @@
     <string name="BaseMortgageAmount">Base Price</string>
     <string name="BaseMortgageAmountDesc">Required: Base price of your property</string>
     <string name="DollarsDown">Dollar Down</string>
-    <string name="DollarsDownDesc">Optional: Percentage to put down (20% default, if left empty) </string>
+    <string name="DollarsDownDesc">Optional: 20% set as default, if left empty </string>
     <string name="PercentageDollarsDown">% Down</string>
     <string name="ZipCode">Zip Code</string>
-    <string name="ZipCodeDesc">Optional: Helps get most accurate rates</string>
+    <string name="ZipCodeDesc">Optional: Helps get most accurate local rates</string>
     <string name="MortgageResult">Result</string>
     <string name="empty_string"></string>
     <string name="title_activity_settings">Settings</string>

@@ -41,7 +41,7 @@
             android:layout_column="1" />
 
         <TextView
-            android:layout_width="125dp"
+            android:layout_width="115dp"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/BaseMortgageAmountDesc"
@@ -70,8 +70,8 @@
             android:layout_column="1" />
 
         <TextView
-            android:layout_width="125dp"
-            android:layout_height="75dp"
+            android:layout_width="115dp"
+            android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/DollarsDownDesc"
             android:layout_row="3"
@@ -99,7 +99,7 @@
             android:layout_column="1" />
 
         <TextView
-            android:layout_width="125dp"
+            android:layout_width="115dp"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ZipCodeDesc"
