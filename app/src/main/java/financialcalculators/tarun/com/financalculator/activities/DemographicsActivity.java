@@ -167,24 +167,11 @@ public class DemographicsActivity extends ActionBarActivity {
                     strBuilder.append("Success");
                     Intent intent = new Intent(getActivity().getApplicationContext(), DemographicsDetailTabbedActivity.class);
                     startActivity(intent);
-                } else if (item.code == 1) {
-                    strBuilder.append(string.zillow_error_code_one);
-                } else if (item.code == 2) {
-                    strBuilder.append(string.zillow_error_code_two);
-                } else if (item.code == 3) {
-                    strBuilder.append(string.zillow_error_code_three);
-                } else if (item.code == 4) {
-                    strBuilder.append(string.zillow_error_code_four);
-                } else if (item.code == 500) {
-                    strBuilder.append(string.zillow_error_code_fivehundred);
-                } else if (item.code == 501) {
-                    strBuilder.append(string.zillow_error_code_fivehundredone);
-                } else if (item.code == 502) {
-                    strBuilder.append(string.zillow_error_code_fivehundredtwo);
-                } else if (item.code == 503) {
-                    strBuilder.append(string.zillow_error_code_fivehundredthree);
-                } else if (item.code == 505) {
-                    strBuilder.append(string.zillow_error_code_fivehundredfive);
+                } else  {
+                    if(item.text!=null)
+                        strBuilder.append(item.text);
+                    else
+                        strBuilder.append(getResources().getString(string.zillow_error_code_one));
                 }
                 Log.v("TEST", strBuilder.toString() + " Code: "+ item.code + " zip:" + item.zip);
                 textView.setText(strBuilder);

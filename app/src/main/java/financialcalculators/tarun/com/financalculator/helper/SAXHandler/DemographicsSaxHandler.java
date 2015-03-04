@@ -4,9 +4,11 @@ package financialcalculators.tarun.com.financalculator.helper.SAXHandler;
     import org.xml.sax.SAXException;
     import org.xml.sax.helpers.DefaultHandler;
 
+    import financialcalculators.tarun.com.financalculator.helper.pojos.Chart;
     import financialcalculators.tarun.com.financalculator.helper.pojos.Link;
     import financialcalculators.tarun.com.financalculator.helper.pojos.LocalDemoGraphicsItem;
     import financialcalculators.tarun.com.financalculator.helper.pojos.Region;
+    import financialcalculators.tarun.com.financalculator.helper.pojos.Table;
 
 /**
      * Created by Tarun on 3/3/2015.
@@ -19,21 +21,29 @@ package financialcalculators.tarun.com.financalculator.helper.SAXHandler;
         }
         Region region = null;
         Link link = null;
+        Table table = null;
+    Chart chart = null;
         public void startElement(String uri, String localName, String qName,
                              Attributes attributes) {
             if(localName.equals("region")){
                 region = new Region();
             } else if(localName.equals("links")) {
                 link = new Link();
+            } else if(localName.equals("chart")){
+                chart = new Chart();
+            } else if(localName.equals("table")) {
+                table = new Table();
             }
-
         characters.delete(0, characters.length());
 
     }
 
     //TODO finish this
     public void endElement(String namespaceURI, String localName, String qName) {
-        if (localName.equals("text")) {
+        if(localName.equals("zip") && (region == null) && (link == null)
+                && (chart == null) && (table==null)){
+            localDemoGraphicsItem.zip = Integer.parseInt(getValue());
+        } else if (localName.equals("text")) {
             localDemoGraphicsItem.text = getValue();
         } else if (localName.equals("code")) {
             localDemoGraphicsItem.code = Integer.parseInt(getValue());
@@ -74,6 +84,14 @@ package financialcalculators.tarun.com.financalculator.helper.SAXHandler;
                 link = null;
             }
 
+        } else if(chart!=null){
+            if(localName.equals("name")){
+                chart.setName(getValue());
+            } else if(localName.equals("url")){
+                chart.setUrl(getValue());
+                localDemoGraphicsItem.charts.add(chart);
+                chart = null;
+            }
         }
 
     }

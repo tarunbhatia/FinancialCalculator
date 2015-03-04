@@ -46,6 +46,7 @@
         </activity>
         <activity
             android:name=".activities.DemographicsDetailTabbedActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_demographics_detail_tabbed" >
         </activity>
     </application>

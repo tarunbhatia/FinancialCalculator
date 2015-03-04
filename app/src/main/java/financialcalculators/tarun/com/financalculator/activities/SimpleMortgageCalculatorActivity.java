@@ -240,22 +240,24 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
                     if (item.getMonthlyHazardInsurance() != 0) {
                         strBuilder.append("Monthly Hazard Ins.: $").append( Integer.toString(item.getMonthlyHazardInsurance())).append("\n");
                     }
-                } else if(item.getCode()==1){
-                    strBuilder.append(R.string.zillow_error_code_one);
-                } else if(item.getCode()==2){
-                    strBuilder.append(R.string.zillow_error_code_two);
-                } else if(item.getCode()==3) {
-                    strBuilder.append(R.string.zillow_error_code_three);
-                } else if(item.getCode()==4) {
-                    strBuilder.append(R.string.zillow_error_code_four);
-                } else if(item.getCode()==500) {
-                    strBuilder.append(R.string.zillow_error_code_fivehundred);
-                } else if(item.getCode() == 501) {
-                    strBuilder.append(R.string.zillow_error_code_fivehundredone);
-                } else if(item.getCode() == 502) {
-                    strBuilder.append(R.string.zillow_error_code_fivehundredtwo);
-                } else if(item.getCode() == 503) {
-                    strBuilder.append(R.string.zillow_error_code_fivehundredthree);
+                } else if (item.getCode() == 1) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_one));
+                } else if (item.getCode() == 2) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_two));
+                } else if (item.getCode() == 3) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_three));
+                } else if (item.getCode() == 4) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_four));
+                } else if (item.getCode() == 500) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_fivehundred));
+                } else if (item.getCode() == 501) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_fivehundredone));
+                } else if (item.getCode() == 502) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_fivehundredtwo));
+                } else if (item.getCode() == 503) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_fivehundredthree));
+                } else if (item.getCode() == 505) {
+                    strBuilder.append(getResources().getString(R.string.zillow_error_code_fivehundredfive));
                 }
                 textView.setText(strBuilder);
                 super.onPostExecute(result);

@@ -1,5 +1,6 @@
 package financialcalculators.tarun.com.financalculator.helper.pojos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,10 @@ public class Table {
     private String name;
     private List<Attribute> attributeList;
 
+    public Table (){
+        name = "";
+        attributeList = new ArrayList<>();
+    }
     public Table(String name, List<Attribute> attributeList) {
         this.name = name;
         this.attributeList = attributeList;

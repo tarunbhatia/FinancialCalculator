@@ -2,6 +2,7 @@ package financialcalculators.tarun.com.financalculator.activities;
 
 import java.util.Locale;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -81,7 +82,7 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_demographics_detail_tabbed, menu);
+        getMenuInflater().inflate(R.menu.menu_subpages, menu);
         return true;
     }
 
@@ -94,6 +95,15 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        else if (id == R.id.action_home) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             return true;
         }
 

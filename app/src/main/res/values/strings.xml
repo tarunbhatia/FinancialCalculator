@@ -34,12 +34,9 @@
     <string name="zillow_error_code_fivehundredfive">Incorrect combination of parameters. When querying by zip code, only include the zip parameter.</string>
     <string name="title_activity_demographics">Local Demographics (Under Development)</string>
     <string name="title_activity_demographics_desc">Returns a set of market, affordability, real estate, and demographic data</string>
-        <string name="title_activity_demographics_detail_tabbed">
-    DemographicsDetailTabbedActivity</string>
-
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_activity_demographics_detail_tabbed">Local Demographics Details</string>
+    <string name="title_section1">Region</string>
+    <string name="title_section2">Links</string>
+    <string name="title_section3">Charts</string>
 
 </resources>
