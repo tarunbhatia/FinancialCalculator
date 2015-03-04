@@ -1,4 +1,4 @@
-package financialcalculators.tarun.com.financalculator;
+package financialcalculators.tarun.com.financalculator.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,7 +16,8 @@ import android.widget.Toast;
 
 import java.text.MessageFormat;
 
-import financialcalculators.tarun.com.financalculator.helper.MonthlyPaymentItem;
+import financialcalculators.tarun.com.financalculator.R;
+import financialcalculators.tarun.com.financalculator.helper.pojos.MonthlyPaymentItem;
 import financialcalculators.tarun.com.financalculator.helper.SAXHandler.MonthlyPaymentSAXHandler;
 import financialcalculators.tarun.com.financalculator.helper.URLHelper.URLParserHelper;
 
@@ -71,8 +72,6 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
     public static class SimpleMortgageCalcFragment extends Fragment implements
             View.OnClickListener {
         public MonthlyPaymentItem item = null;
-
-
         Button calcButton = null;
 
         public SimpleMortgageCalcFragment() {
@@ -159,7 +158,6 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
 
             public String getMonthlyPaymentApi = "http://www.zillow.com/webservice/GetMonthlyPayments.htm?zws-id=X1-ZWz1dyt87mjle3_9fxlx&price={0}";
             public String percentageDownApi = "&down={1}";
-            public String dollardsDownApi = "&dollarsDown{1}";
             public String zipCodeApi = "&zip=";
 
             @Override

@@ -1,4 +1,4 @@
-package financialcalculators.tarun.com.financalculator.helper;
+package financialcalculators.tarun.com.financalculator.helper.pojos;
 
 /**
  * Created by Tarun on 12/17/2014.

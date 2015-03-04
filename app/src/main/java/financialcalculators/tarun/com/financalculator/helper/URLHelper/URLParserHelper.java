@@ -1,6 +1,5 @@
 package financialcalculators.tarun.com.financalculator.helper.URLHelper;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.xml.sax.InputSource;
@@ -11,16 +10,11 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.text.MessageFormat;
 
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import financialcalculators.tarun.com.financalculator.SimpleMortgageCalculatorActivity;
-import financialcalculators.tarun.com.financalculator.helper.MonthlyPaymentItem;
-import financialcalculators.tarun.com.financalculator.helper.SAXHandler.MonthlyPaymentSAXHandler;
 
 /**
  * Created by Tarun on 12/17/2014.

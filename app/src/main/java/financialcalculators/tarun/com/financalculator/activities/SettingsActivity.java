@@ -1,10 +1,12 @@
-package financialcalculators.tarun.com.financalculator;
+package financialcalculators.tarun.com.financalculator.activities;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import financialcalculators.tarun.com.financalculator.R;
 
 
 public class SettingsActivity extends ActionBarActivity {

@@ -107,5 +107,51 @@
                 android:visibility="visible"
                 android:singleLine="false" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/MainActivityThirdImageView"
+                android:layout_column="1"
+                android:clickable="true"
+                android:contentDescription="@string/title_activity_demographics_desc" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/title_activity_demographics"
+                android:id="@+id/MainActivityThirdTextView"
+                android:layout_column="2"
+                android:clickable="true"
+                android:onClick="@string/title_activity_demographics"
+                android:visibility="visible" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/title_activity_demographics_desc"
+                android:id="@+id/MainActivityThirdTextSubView"
+                android:layout_column="2"
+                android:clickable="true"
+                android:visibility="visible"
+                android:singleLine="false" />
+        </TableRow>
+
     </TableLayout>
 </RelativeLayout>

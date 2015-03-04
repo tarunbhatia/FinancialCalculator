@@ -6,7 +6,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import financialcalculators.tarun.com.financalculator.helper.MonthlyPaymentItem;
+import financialcalculators.tarun.com.financalculator.helper.pojos.MonthlyPaymentItem;
 
 /**
  * Created by Tarun on 12/17/2014.

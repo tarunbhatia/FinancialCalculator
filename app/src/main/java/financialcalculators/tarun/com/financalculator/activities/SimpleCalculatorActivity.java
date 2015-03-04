@@ -1,4 +1,4 @@
-package financialcalculators.tarun.com.financalculator;
+package financialcalculators.tarun.com.financalculator.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import financialcalculators.tarun.com.financalculator.R;
 
 /**
  * Created by Tarun on 12/17/2014.
@@ -151,7 +153,9 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
         }
         @Override
         public void onClick(View v) {
-            Float num1, num2, result = (float) 0;
+            Float num1;
+            Float num2;
+            Float result;
             TextView firstInput = (TextView) getActivity().findViewById(
                     R.id.firstInput);
             TextView secondInput = (TextView) getActivity().findViewById(

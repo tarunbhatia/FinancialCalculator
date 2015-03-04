@@ -29,7 +29,17 @@
     <string name="zillow_error_code_four">The Zillow Web Service is currently not available. Please come back later and try again.</string>
     <string name="zillow_error_code_fivehundred">Make sure the price parameter is specified and is a valid integer.</string>
     <string name="zillow_error_code_fivehundredone">Make sure the zip parameter is specified and is a valid five digit ZIP code.</string>
-    <string name="zillow_error_code_fivehundredtwo">Make sure the down or dollarsdown parameter is specified and is a valid integer.</string>
+    <string name="zillow_error_code_fivehundredtwo">Make sure the down or dollarsdown parameter is specified and is a valid integer or Region specified was not found.</string>
     <string name="zillow_error_code_fivehundredthree">Zillow Mortgage Marketplace rate data is currently unavailable. Please come back later and try again.</string>
+    <string name="zillow_error_code_fivehundredfive">Incorrect combination of parameters. When querying by zip code, only include the zip parameter.</string>
+    <string name="title_activity_demographics">Local Demographics (Under Development)</string>
+    <string name="title_activity_demographics_desc">Returns a set of market, affordability, real estate, and demographic data</string>
+        <string name="title_activity_demographics_detail_tabbed">
+    DemographicsDetailTabbedActivity</string>
+
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
 </resources>

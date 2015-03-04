@@ -1,4 +1,4 @@
-package financialcalculators.tarun.com.financalculator;
+package financialcalculators.tarun.com.financalculator.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import financialcalculators.tarun.com.financalculator.R;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -56,9 +57,9 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment implements
             View.OnClickListener {
-        TextView firstOption, secondOption = null;
+        TextView firstOption, secondOption, thirdOption = null;
         public PlaceholderFragment() {
-            firstOption = secondOption= null;
+            firstOption = secondOption = thirdOption= null;
         }
 
         @Override
@@ -76,6 +77,9 @@ public class MainActivity extends ActionBarActivity {
 
             secondOption = (TextView) getActivity().findViewById(R.id.MainActivitySecondTextView);
             secondOption.setOnClickListener(this);
+
+            thirdOption = (TextView) getActivity().findViewById(R.id.MainActivityThirdTextView);
+            thirdOption.setOnClickListener(this);
         }
 
 
@@ -98,7 +102,12 @@ public class MainActivity extends ActionBarActivity {
 
                     Intent intent2 = new Intent(getActivity().getApplicationContext(),SimpleMortgageCalculatorActivity.class);
                     startActivity(intent2);
-;
+
+                case R.id.MainActivityThirdImageView:
+                case R.id.MainActivityThirdTextView:
+                case R.id.MainActivityThirdTextSubView:
+                    Intent intent3 = new Intent (getActivity().getApplicationContext(),DemographicsActivity.class);
+                    startActivity(intent3);
                 default:
                     break;
             }
