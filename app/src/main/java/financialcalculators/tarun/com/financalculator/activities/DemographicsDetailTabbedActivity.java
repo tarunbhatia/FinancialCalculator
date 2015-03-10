@@ -1,36 +1,46 @@
 package financialcalculators.tarun.com.financalculator.activities;
 
-import java.util.Locale;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.Locale;
 
 import financialcalculators.tarun.com.financalculator.R;
+import financialcalculators.tarun.com.financalculator.helper.pojos.Chart;
+import financialcalculators.tarun.com.financalculator.helper.pojos.LocalDemoGraphicsItem;
 
 public class DemographicsDetailTabbedActivity extends ActionBarActivity implements ActionBar.TabListener {
 
     /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+    * The {@link android.support.v4.view.PagerAdapter} that will provide
+    * fragments for each of the sections. We use a
+    * {@link FragmentPagerAdapter} derivative, which will keep every
+    * loaded fragment in memory. If this becomes too memory intensive, it
+    * may be best to switch to a
+    * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+    */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -41,6 +51,7 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_demographics_detail_tabbed);
 
         // Set up the action bar.
@@ -130,6 +141,9 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        RegionFragment regionFragment = new RegionFragment();
+        LinksFragment linksFragment = new LinksFragment();
+        ChartFragment chartFragment = new ChartFragment();
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -139,7 +153,13 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            if(position == 0){
+                return regionFragment;
+            } else if(position == 1) {
+                return linksFragment;
+            } else {
+                return chartFragment;
+            }
         }
 
         @Override
@@ -164,36 +184,142 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
     }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * A fragment for region tab
      */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    public static class RegionFragment extends ListFragment {
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
-        public PlaceholderFragment() {
+            Intent intent = getActivity().getIntent();
+            LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
+            String[] regionList = {"ID - "+ item.region.getRegionId(),
+                    "STATE - " + item.region.getState(), "CITY - " + item.region.getCity(),
+                    "ZIP - " + item.region.getZipCode(), "LATITUDE - " + item.region.getLatitude(),
+                    "LONGITUDE - " + item.region.getLatitude(), "ZILLOW URL - " + item.region.getZmmrateurl()};
+            ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, regionList);
+            setListAdapter(adapter);
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_demographics_detail_tabbed, container, false);
-            return rootView;
+            super.onCreateView(inflater, container, savedInstanceState);
+            return inflater.inflate(R.layout.fragment_demo_detail_tabbed_region, container, false);
+        }
+
+        @Override
+        public void onListItemClick(ListView l, View v, int pos, long id) {
+            super.onListItemClick(l, v, pos, id);
+            if(pos == 6) {
+                Intent intent = getActivity().getIntent();
+                LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
+                if(!item.region.getZmmrateurl().isEmpty()) {
+                    Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.region.getZmmrateurl()));
+                    startActivity(urlIntent);
+                }
+            }
+            Toast.makeText(getActivity(), "Item " + pos + " was clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * A fragment for links tab
+     */
+    public static class LinksFragment extends ListFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            Intent intent = getActivity().getIntent();
+            LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
+            String[] linksList = {"AFFORDABILITY - "+ item.links.getAffordability(),
+                    "HOMES AND REAL ESTATE - " + item.links.getHomesandrealestate(),
+                    "PEOPLE - " + item.links.getPeople(),
+                    "FOR SALE - " + item.links.getForSale(),
+                    "FOR SALE BY OWNER - " + item.links.getForSaleByOwner(),
+                    "FORECLOSURES - " + item.links.getForeclosures(),
+                    "RECENTLY SOLD - " + item.links.getRecentlySold()};
+            ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, linksList);
+            setListAdapter(adapter);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            super.onCreateView(inflater, container, savedInstanceState);
+            return inflater.inflate(R.layout.fragment_demo_detail_tabbed_region, container, false);
+        }
+
+        @Override
+        public void onListItemClick(ListView l, View v, int pos, long id) {
+            super.onListItemClick(l, v, pos, id);
+            Intent intent = getActivity().getIntent();
+            LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
+            Intent urlIntent = null;
+            if(pos == 0 && !item.links.getAffordability().isEmpty()){
+                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getAffordability()));
+            } else if(pos == 1 && !item.links.getHomesandrealestate().isEmpty()){
+                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getHomesandrealestate()));
+            } else if(pos == 2 && !item.links.getPeople().isEmpty()) {
+                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getPeople()));
+            } else if(pos == 3 && !item.links.getForSale().isEmpty()) {
+                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForSale()));
+            } else if(pos == 4 && !item.links.getForSaleByOwner().isEmpty()) {
+                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForSaleByOwner()));
+            } else if(pos == 5 && !item.links.getForeclosures().isEmpty()) {
+                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForeclosures()));
+            } else if(pos == 6 && !item.links.getRecentlySold().isEmpty()) {
+                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getRecentlySold()));
+            }
+            if(urlIntent!= null) {
+                startActivity(urlIntent);
+            }
+
+            Toast.makeText(getActivity(), "Item " + pos + " was clicked", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * A fragment for chart tab
+     */
+    public static class ChartFragment extends ListFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            Intent intent = getActivity().getIntent();
+            LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
+            String[] chartList = new String[item.charts.size()];
+            int i = 0;
+            for(Chart chart: item.charts){
+                chartList[i] = chart.getName() + " Link";
+                i++;
+            }
+            ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, chartList);
+            setListAdapter(adapter);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            super.onCreateView(inflater, container, savedInstanceState);
+            return inflater.inflate(R.layout.fragment_demo_detail_tabbed_region, container, false);
+        }
+
+        @Override
+        public void onListItemClick(ListView l, View v, int pos, long id) {
+            super.onListItemClick(l, v, pos, id);
+            Intent intent = getActivity().getIntent();
+            LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
+            Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.charts.get(pos).getUrl()));
+            Toast.makeText(getActivity(), "Item " + item.charts.get(pos).getName() + " was clicked", Toast.LENGTH_SHORT).show();
+            if(!item.charts.get(pos).getUrl().isEmpty()) {
+                startActivity(urlIntent);
+            }
+        }
+    }
 }

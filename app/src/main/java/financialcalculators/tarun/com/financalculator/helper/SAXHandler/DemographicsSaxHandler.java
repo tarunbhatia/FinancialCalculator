@@ -61,6 +61,7 @@ package financialcalculators.tarun.com.financalculator.helper.SAXHandler;
             } else if(localName.equals("longitude")){
                 region.setLongitude(Float.parseFloat(getValue()));
             } else if(localName.equals("zmmrateurl")){
+                region.setZmmrateurl(getValue());
                 //Once you get the last value, push that to localDemoGraphicsItem and nullify it
                 localDemoGraphicsItem.region = region;
                 region = null;

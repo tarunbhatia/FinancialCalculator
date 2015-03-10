@@ -1,12 +1,13 @@
 package financialcalculators.tarun.com.financalculator.helper.pojos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Tarun on 3/3/2015.
  */
-public class LocalDemoGraphicsItem {
+public class LocalDemoGraphicsItem implements Serializable {
 
     public int zip;
     public int code;

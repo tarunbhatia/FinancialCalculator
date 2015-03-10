@@ -166,6 +166,7 @@ public class DemographicsActivity extends ActionBarActivity {
                 if (item.code == 0) {
                     strBuilder.append("Success");
                     Intent intent = new Intent(getActivity().getApplicationContext(), DemographicsDetailTabbedActivity.class);
+                    intent.putExtra("LocalDemoGraphicsItem", item);
                     startActivity(intent);
                 } else  {
                     if(item.text!=null)

@@ -1,9 +1,11 @@
 package financialcalculators.tarun.com.financalculator.helper.pojos;
 
+import java.io.Serializable;
+
 /**
  * Created by Tarun on 3/3/2015.
  */
-public class Link {
+public class Link  implements Serializable {
     private String affordability;
     private String homesandrealestate;
     private String people;

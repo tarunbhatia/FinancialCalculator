@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
 
                     Intent intent2 = new Intent(getActivity().getApplicationContext(),SimpleMortgageCalculatorActivity.class);
                     startActivity(intent2);
-
+                    break;
                 case R.id.MainActivityThirdImageView:
                 case R.id.MainActivityThirdTextView:
                 case R.id.MainActivityThirdTextSubView:

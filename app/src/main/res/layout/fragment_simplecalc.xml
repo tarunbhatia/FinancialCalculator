@@ -181,7 +181,6 @@
             android:layout_row="0"
             android:clickable="false"
             android:longClickable="false"
-            android:onClick=""
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView

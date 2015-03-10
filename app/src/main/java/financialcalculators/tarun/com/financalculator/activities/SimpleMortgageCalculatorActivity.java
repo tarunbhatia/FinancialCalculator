@@ -188,12 +188,23 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
                                 Integer.toString(params[0].getPrice()), Integer.toString(params[0].getDownPercentage())});
                     }
                     else if(!isDollarDownPresent && isZipCodePresent){
+                        String zip = Integer.toString(params[0].getZipCode());
+                        //Lets make sure the zip code is 5 letters to address east code for ex. Newark, NJ 07103
+                        if((params[0].getZipCode() < 10000) && (params[0].getZipCode() > 999)) {
+                            zip = "0" + zip;
+                        }
                         url = MessageFormat.format(getMonthlyPaymentApi, new Object[]{
-                                Integer.toString(params[0].getPrice()), Integer.toString(params[0].getZipCode())});
+                                    Integer.toString(params[0].getPrice()), zip});
+
                     }
                     else {
+                        String zip = Integer.toString(params[0].getZipCode());
+                        //Lets make sure the zip code is 5 letters to address east code for ex. Newark, NJ 07103
+                        if((params[0].getZipCode() < 10000) && (params[0].getZipCode() > 999)) {
+                            zip = "0" + zip;
+                        }
                         url = MessageFormat.format(getMonthlyPaymentApi, new Object[]{
-                                Integer.toString(params[0].getPrice()), Integer.toString(params[0].getDownPercentage()), Integer.toString(params[0].getZipCode())});
+                                Integer.toString(params[0].getPrice()), Integer.toString(params[0].getDownPercentage()), zip});
                     }
 
                     MonthlyPaymentSAXHandler handler = new MonthlyPaymentSAXHandler();

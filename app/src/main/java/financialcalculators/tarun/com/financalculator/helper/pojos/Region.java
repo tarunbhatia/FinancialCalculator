@@ -1,9 +1,11 @@
 package financialcalculators.tarun.com.financalculator.helper.pojos;
 
+import java.io.Serializable;
+
 /**
  * Created by Tarun on 3/3/2015.
  */
-public class Region {
+public class Region implements Serializable {
     private int regionId;
     private String state;
     private String city;
