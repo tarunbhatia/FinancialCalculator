@@ -197,7 +197,7 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
             String[] regionList = {"ID - "+ item.region.getRegionId(),
                     "STATE - " + item.region.getState(), "CITY - " + item.region.getCity(),
                     "ZIP - " + item.region.getZipCode(), "LATITUDE - " + item.region.getLatitude(),
-                    "LONGITUDE - " + item.region.getLatitude(), "ZILLOW URL - " + item.region.getZmmrateurl()};
+                    "LONGITUDE - " + item.region.getLatitude(), "MORE INFO"};
             ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, regionList);
             setListAdapter(adapter);
         }
@@ -219,8 +219,9 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
                     Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.region.getZmmrateurl()));
                     startActivity(urlIntent);
                 }
+            } else{
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(getActivity(), "Item " + pos + " was clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -235,13 +236,8 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
 
             Intent intent = getActivity().getIntent();
             LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
-            String[] linksList = {"AFFORDABILITY - "+ item.links.getAffordability(),
-                    "HOMES AND REAL ESTATE - " + item.links.getHomesandrealestate(),
-                    "PEOPLE - " + item.links.getPeople(),
-                    "FOR SALE - " + item.links.getForSale(),
-                    "FOR SALE BY OWNER - " + item.links.getForSaleByOwner(),
-                    "FORECLOSURES - " + item.links.getForeclosures(),
-                    "RECENTLY SOLD - " + item.links.getRecentlySold()};
+            String[] linksList = {"AFFORDABILITY", "HOMES AND REAL ESTATE", "PEOPLE", "FOR SALE",
+                    "FOR SALE BY OWNER", "FORECLOSURES", "RECENTLY SOLD"};
             ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, linksList);
             setListAdapter(adapter);
         }
@@ -261,24 +257,36 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
             Intent urlIntent = null;
             if(pos == 0 && !item.links.getAffordability().isEmpty()){
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getAffordability()));
+            } else if (pos == 0 && item.links.getAffordability().isEmpty()){
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             } else if(pos == 1 && !item.links.getHomesandrealestate().isEmpty()){
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getHomesandrealestate()));
+            } else if (pos == 1 && item.links.getHomesandrealestate().isEmpty()){
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             } else if(pos == 2 && !item.links.getPeople().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getPeople()));
+            } else if (pos == 2 && item.links.getPeople().isEmpty()){
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             } else if(pos == 3 && !item.links.getForSale().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForSale()));
+            } else if (pos == 3 && item.links.getForSale().isEmpty()){
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             } else if(pos == 4 && !item.links.getForSaleByOwner().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForSaleByOwner()));
+            } else if (pos == 4 && item.links.getForSaleByOwner().isEmpty()){
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             } else if(pos == 5 && !item.links.getForeclosures().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForeclosures()));
+            } else if (pos == 5 && item.links.getForeclosures().isEmpty()){
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             } else if(pos == 6 && !item.links.getRecentlySold().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getRecentlySold()));
+            } else if (pos == 6 && item.links.getRecentlySold().isEmpty()){
+                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             }
             if(urlIntent!= null) {
                 startActivity(urlIntent);
             }
-
-            Toast.makeText(getActivity(), "Item " + pos + " was clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -296,7 +304,7 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
             String[] chartList = new String[item.charts.size()];
             int i = 0;
             for(Chart chart: item.charts){
-                chartList[i] = chart.getName() + " Link";
+                chartList[i] = chart.getName().toUpperCase();
                 i++;
             }
             ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, chartList);

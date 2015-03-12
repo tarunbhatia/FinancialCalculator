@@ -144,14 +144,17 @@ public class DemographicsActivity extends ActionBarActivity {
                 try {
                     String url;
                     if (params[0].zip != 0) {
-                        url = MessageFormat.format(getDemographicsApi, new Object[]{
-                                Integer.toString(params[0].zip)});
+                        String zip = Integer.toString(params[0].zip);
+                        //Lets make sure the zip code is 5 letters to address east code for ex. Newark, NJ 07103
+                        if((params[0].zip < 10000) && (params[0].zip > 999)) {
+                            zip = "0" + zip;
+                        }
+                        url = MessageFormat.format(getDemographicsApi, new Object[]{zip});
                         DemographicsSaxHandler handler = new DemographicsSaxHandler();
                         URLParserHelper.parseWithRetry(url, handler, "GetDemographics");
                         item = handler.getLocalDemoGraphicsItem();
                         return item;
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -38,5 +38,5 @@
     <string name="title_section1">Region</string>
     <string name="title_section2">Links</string>
     <string name="title_section3">Charts</string>
-
+    <string name="zillow_url_not_present">Link not available from Zillow at this time</string>
 </resources>
