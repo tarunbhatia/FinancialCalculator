@@ -58,8 +58,10 @@ public class MainActivity extends ActionBarActivity {
     public static class PlaceholderFragment extends Fragment implements
             View.OnClickListener {
         TextView firstOption, secondOption, thirdOption = null;
+        TextView firstOptionSub, secondOptionSub, thirdOptionSub = null;
         public PlaceholderFragment() {
             firstOption = secondOption = thirdOption= null;
+            firstOptionSub = secondOptionSub = thirdOptionSub = null;
         }
 
         @Override
@@ -75,11 +77,20 @@ public class MainActivity extends ActionBarActivity {
             firstOption = (TextView) getActivity().findViewById(R.id.MainActivityFirstTextView);
             firstOption.setOnClickListener(this);
 
+            firstOptionSub = (TextView)getActivity().findViewById(R.id.MainActivityFirstTextSubView);
+            firstOptionSub.setOnClickListener(this);
+
             secondOption = (TextView) getActivity().findViewById(R.id.MainActivitySecondTextView);
             secondOption.setOnClickListener(this);
 
+            secondOptionSub = (TextView) getActivity().findViewById(R.id.MainActivitySecondTextSubView);
+            secondOptionSub.setOnClickListener(this);
+
             thirdOption = (TextView) getActivity().findViewById(R.id.MainActivityThirdTextView);
             thirdOption.setOnClickListener(this);
+
+            thirdOptionSub = (TextView) getActivity().findViewById(R.id.MainActivityThirdTextSubView);
+            thirdOptionSub.setOnClickListener(this);
         }
 
 

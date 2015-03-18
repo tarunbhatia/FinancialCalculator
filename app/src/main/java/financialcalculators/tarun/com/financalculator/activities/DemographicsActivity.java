@@ -1,21 +1,35 @@
 package financialcalculators.tarun.com.financalculator.activities;
 
+import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Looper;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.List;
+import java.util.Locale;
 
 import financialcalculators.tarun.com.financalculator.R;
 import financialcalculators.tarun.com.financalculator.helper.SAXHandler.DemographicsSaxHandler;
@@ -78,9 +92,11 @@ public class DemographicsActivity extends ActionBarActivity {
 
         Button calculateButton = null;
         Button gpsEnableButton  = null;
+        private LocationManager locationManager = null;
+        private LocationListener locationListener = null;
         public LocalDemoGraphicsItem item = null;
+        private ProgressBar pb =null;
         //Public constructor
-        //TODO declare obj
         public DemographicsFragment() {
             calculateButton = null;
             gpsEnableButton = null;
@@ -90,11 +106,9 @@ public class DemographicsActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(layout.fragment_demographics, container, false);
-            return rootView;
+            return inflater.inflate(layout.fragment_demographics, container, false);
         }
 
-        //TODO init objects
         @Override
         public void onActivityCreated(Bundle savedInstanceBundle) {
             super.onActivityCreated(savedInstanceBundle);
@@ -102,38 +116,134 @@ public class DemographicsActivity extends ActionBarActivity {
             gpsEnableButton.setOnClickListener(this);
             calculateButton = (Button) getActivity().findViewById(id.calculateButton);
             calculateButton.setOnClickListener(this);
+            locationManager = (LocationManager) getActivity().getApplicationContext().
+                    getSystemService(Context.LOCATION_SERVICE);
+            pb = (ProgressBar) getActivity().findViewById(R.id.progressBar);
+            pb.setVisibility(View.INVISIBLE);
         }
 
-        //TODO implement obj functionality
+        /*----Method to Check GPS is enable or disable ----- */
+        private Boolean getDisplayGpsStatus() {
+            ContentResolver contentResolver = getActivity().getBaseContext()
+                    .getContentResolver();
+            boolean gpsStatus = Settings.Secure
+                    .isLocationProviderEnabled(contentResolver,
+                            LocationManager.GPS_PROVIDER);
+            return gpsStatus;
+        }
+
         @Override
         public void onClick(View v) {
             TextView getZipCodeTextView = (TextView) getActivity().findViewById(id.editTextViewZip);
+            Boolean flag;
 
             try {
                 switch (v.getId()) {
+                    case id.GPSButton:
+                        flag = getDisplayGpsStatus();
+                        if(flag){
+                            pb.setVisibility(View.VISIBLE);
+                            locationListener = new LocationListener() {
+                                @Override
+                                public void onLocationChanged(Location loc) {
+
+                                    pb.setVisibility(View.INVISIBLE);
+
+                                    /*----------to get ZipCode from coordinates ------------- */
+                                    Geocoder gcd = new Geocoder(getActivity().getBaseContext(),
+                                            Locale.getDefault());
+                                    List<Address> addresses;
+                                    try {
+                                        addresses = gcd.getFromLocation(loc.getLatitude(), loc
+                                                .getLongitude(), 1);
+                                        if (addresses.size() > 0) {
+                                            item.zip = Integer.parseInt(addresses.get(0).getPostalCode());
+                                            if (item.zip > 0 && item.zip <= 100000) {
+                                                pb.setVisibility(View.INVISIBLE);
+                                                new DemographicsURLParserHelper().execute(item);
+
+                                            }
+                                        }
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                                }
+
+                                @Override
+                                public void onProviderEnabled(String provider) {
+
+                                }
+
+                                @Override
+                                public void onProviderDisabled(String provider) {
+
+                                }
+                            };
+                            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, Looper.getMainLooper());
+                        }
+                        else{
+                            alertbox();
+                        }
+
+                        break;
                     case id.calculateButton:
                         if (getZipCodeTextView != null && !getZipCodeTextView.getText().toString().isEmpty()) {
                             String zipCode = getZipCodeTextView.getText().toString();
                             item.zip = Integer.parseInt(zipCode);
                         }
                         try {
-                            if(item.zip>0){
+                            if(item.zip>0 && item.zip <=100000){
                                 new DemographicsURLParserHelper().execute(item);
                             }
                             else{
-                                Toast.makeText(getActivity(), "Please Enter zip code to get started",
+                                Toast.makeText(getActivity(), "Please Enter proper zip code to get started",
                                         Toast.LENGTH_SHORT).show();
+                                getZipCodeTextView.setText("");
                             }
 
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
+                        break;
                 }
             } catch (Exception e) {
                 Toast.makeText(getActivity(), "An Error Occurred. Please Try Again.",
                         Toast.LENGTH_SHORT).show();
             }
+        }
+
+        /*----------Method to create an AlertBox ------------- */
+        protected void alertbox() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Your Device's GPS is Disable")
+                    .setCancelable(false)
+                    .setTitle("** Gps Status **")
+                    .setPositiveButton("Gps On",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // finish the current activity
+                                    // AlertBoxAdvance.this.finish();
+                                    Intent myIntent = new Intent(
+                                            Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    startActivity(myIntent);
+                                    dialog.cancel();
+                                }
+                            })
+                    .setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // cancel the dialog box
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
 
         private class DemographicsURLParserHelper extends AsyncTask<LocalDemoGraphicsItem, Void, LocalDemoGraphicsItem> {
@@ -177,7 +287,6 @@ public class DemographicsActivity extends ActionBarActivity {
                     else
                         strBuilder.append(getResources().getString(string.zillow_error_code_one));
                 }
-                Log.v("TEST", strBuilder.toString() + " Code: "+ item.code + " zip:" + item.zip);
                 textView.setText(strBuilder);
                 super.onPostExecute(result);
             }
