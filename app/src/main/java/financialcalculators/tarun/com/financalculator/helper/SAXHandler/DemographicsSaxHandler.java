@@ -38,7 +38,6 @@ package financialcalculators.tarun.com.financalculator.helper.SAXHandler;
 
     }
 
-    //TODO finish this
     public void endElement(String namespaceURI, String localName, String qName) {
         if(localName.equals("zip") && (region == null) && (link == null)
                 && (chart == null) && (table==null)){

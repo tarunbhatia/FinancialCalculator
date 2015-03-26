@@ -39,4 +39,6 @@
     <string name="title_section2">Links</string>
     <string name="title_section3">Charts</string>
     <string name="zillow_url_not_present">Link not available from Zillow at this time</string>
+    <string name="banner_ad_unit_id">ca-app-pub-0264647149873417/1000000001</string>
+    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
 </resources>

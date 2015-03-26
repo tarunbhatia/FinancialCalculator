@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import financialcalculators.tarun.com.financalculator.R;
 
 
@@ -67,13 +70,18 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-
             return inflater.inflate(R.layout.fragment_main, container, false);
         }
 
         @Override
         public void onActivityCreated(Bundle savedInstanceBundle) {
             super.onActivityCreated(savedInstanceBundle);
+
+            //Code for adding adds
+            AdView mAdView = (AdView) getActivity().findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice("618cd2d5").build();
+            mAdView.loadAd(adRequest);
+
             firstOption = (TextView) getActivity().findViewById(R.id.MainActivityFirstTextView);
             firstOption.setOnClickListener(this);
 

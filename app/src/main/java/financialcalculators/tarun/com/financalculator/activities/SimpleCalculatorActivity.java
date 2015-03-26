@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import financialcalculators.tarun.com.financalculator.R;
 
 /**
@@ -84,11 +87,12 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
         Button divButton = null;
         Button removeButton = null;
         Button multiplyButton = null;
+        Button periodButton = null;
 
         public SimpleCalcFragment() {
             oneButton = twoButton = threeButton = fourButton = fiveButton = sixButton = null;
             sevenButton = eightButton = nineButton = zeroButton = plusButton = minusButton = equalButton = clearButton = null;
-            divButton = removeButton = multiplyButton = null;
+            divButton = removeButton = multiplyButton = periodButton = null;
         }
 
         @Override
@@ -144,6 +148,9 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
 
             equalButton = (Button) getActivity().findViewById(R.id.buttonEqual);
             equalButton.setOnClickListener(this);
+
+            periodButton = (Button) getActivity().findViewById(R.id.buttonPeriod);
+            periodButton.setOnClickListener(this);
         }
 
         @Override
@@ -193,6 +200,18 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                     break;
                 case R.id.button0:
                     secondInput.setText(secondInput.getText() + "0");
+                    break;
+                case R.id.buttonPeriod:
+                    if(!secondInput.getText().toString().contains(".")){
+                        if(secondInput.getText().length() > 0) {
+                            String secInpTxt = secondInput.getText().toString() + ".";
+                            secondInput.setText(secInpTxt);
+                        }
+                        else{
+                            String secInpTxt = secondInput.getText().toString() + "0.";
+                            secondInput.setText(secInpTxt);
+                        }
+                    }
                     break;
                 case R.id.buttonRemove:
                     if (secondInput.getText().length() > 0) {
@@ -320,25 +339,53 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                                 && curOperator.getText().toString().length() != 0) {
 
                             num1 = Float.parseFloat(firstInput.getText().toString());
+                            num1 = (float)((int)( num1 *100f ))/100f;
+
                             num2 = Float.parseFloat(secondInput.getText().toString());
+                            num2 = (float)((int)( num2 *100f ))/100f;
+
                             if (curOperator.getText().equals("+")) {
                                 result = num1 + num2;
-                                secondInput.setText(result.toString());
+                                result = (float)((int)( result *100f ))/100f;
+                                if(result.toString().endsWith(".0")){
+                                    secondInput.setText(result.toString().substring(0,result.toString().length()-2));
+                                }
+                                else{
+                                    secondInput.setText(result.toString());
+                                }
                                 firstInput.setText("");
                                 curOperator.setText("");
                             } else if (curOperator.getText().equals("-")) {
                                 result = num1 - num2;
-                                secondInput.setText(result.toString());
+                                result = (float)((int)( result *100f ))/100f;
+                                if(result.toString().endsWith(".0")){
+                                    secondInput.setText(result.toString().substring(0,result.toString().length()-2));
+                                }
+                                else{
+                                    secondInput.setText(result.toString());
+                                }
                                 firstInput.setText("");
                                 curOperator.setText("");
                             } else if (curOperator.getText().equals("*")) {
                                 result = num1 * num2;
-                                secondInput.setText(result.toString());
+                                result = (float)((int)( result *100f ))/100f;
+                                if(result.toString().endsWith(".0")){
+                                    secondInput.setText(result.toString().substring(0,result.toString().length()-2));
+                                }
+                                else{
+                                    secondInput.setText(result.toString());
+                                }
                                 firstInput.setText("");
                                 curOperator.setText("");
                             } else if (curOperator.getText().equals("/")) {
                                 result = num1 / num2;
-                                secondInput.setText(result.toString());
+                                result = (float)((int)( result *100f ))/100f;
+                                if(result.toString().endsWith(".0")){
+                                    secondInput.setText(result.toString().substring(0,result.toString().length()-2));
+                                }
+                                else{
+                                    secondInput.setText(result.toString());
+                                }
                                 firstInput.setText("");
                                 curOperator.setText("");
                             }
