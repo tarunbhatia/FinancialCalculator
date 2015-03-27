@@ -29,8 +29,6 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -60,11 +58,11 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment implements
             View.OnClickListener {
-        TextView firstOption, secondOption, thirdOption = null;
-        TextView firstOptionSub, secondOptionSub, thirdOptionSub = null;
+        TextView firstOption, secondOption, thirdOption, fourthOption = null;
+        TextView firstOptionSub, secondOptionSub, thirdOptionSub, fourthOptionSub = null;
         public PlaceholderFragment() {
-            firstOption = secondOption = thirdOption= null;
-            firstOptionSub = secondOptionSub = thirdOptionSub = null;
+            firstOption = secondOption = thirdOption = fourthOption = null;
+            firstOptionSub = secondOptionSub = thirdOptionSub = fourthOptionSub = null;
         }
 
         @Override
@@ -99,6 +97,12 @@ public class MainActivity extends ActionBarActivity {
 
             thirdOptionSub = (TextView) getActivity().findViewById(R.id.MainActivityThirdTextSubView);
             thirdOptionSub.setOnClickListener(this);
+
+            fourthOption = (TextView) getActivity().findViewById(R.id.MainActivityFourthTextView);
+            fourthOption.setOnClickListener(this);
+
+            fourthOptionSub = (TextView) getActivity().findViewById(R.id.MainActivityFourthTextSubView);
+            fourthOptionSub.setOnClickListener(this);
         }
 
 
@@ -127,6 +131,12 @@ public class MainActivity extends ActionBarActivity {
                 case R.id.MainActivityThirdTextSubView:
                     Intent intent3 = new Intent (getActivity().getApplicationContext(),DemographicsActivity.class);
                     startActivity(intent3);
+                    break;
+                case R.id.MainActivityFourthTextView:
+                case R.id.MainActivityFourthTextSubView:
+                case R.id.MainActivityFourthImageView:
+                    Intent intent4 = new Intent (getActivity().getApplicationContext(),TipCalculatorActivity.class);
+                    startActivity(intent4);
                 default:
                     break;
             }

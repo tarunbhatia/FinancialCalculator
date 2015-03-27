@@ -9,6 +9,8 @@
     <string name="simple_calculator_desc">A Simple Calculator</string>
     <string name="simple_mortgage">Simple Mortgage Calculator</string>
     <string name="simple_mortgage_desc">A Simple Mortgage Calculator</string>
+    <string name="title_tip_calculator">Tip Calculator</string>
+    <string name="title_tip_calculator_desc">Helps split your check with the number of folks on the table</string>
     <string name="MainActivityFirstImageDesc">Image View</string>
     <string name="BaseMortgageAmount">Base Price</string>
     <string name="BaseMortgageAmountDesc">Required: Base price of your property</string>
@@ -40,5 +42,6 @@
     <string name="title_section3">Charts</string>
     <string name="zillow_url_not_present">Link not available from Zillow at this time</string>
     <string name="banner_ad_unit_id">ca-app-pub-0264647149873417/1000000001</string>
+    <string name="title_activity_tip_calculator">Tip Calculator</string>
     <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
 </resources>
