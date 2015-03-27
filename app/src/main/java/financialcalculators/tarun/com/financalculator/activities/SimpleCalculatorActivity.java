@@ -274,7 +274,11 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                     // If this is the first input, push it to the first Text Window
                     // Clean up the second text window
                     if (firstInput.getText().length() == 0) {
-                        firstInput.setText(secondInput.getText());
+
+                        num2 = Float.parseFloat(secondInput.getText().toString());
+                        num2 = (float)((int)( num2 *100f ))/100f;
+
+                        firstInput.setText(num2.toString());
                         secondInput.setText("");
                     }
                     curOperator.setText("+");
@@ -290,7 +294,10 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                     // If this is the first input, push it to the first Text Window
                     // Clean up the second text window
                     if (firstInput.getText().length() == 0) {
-                        firstInput.setText(secondInput.getText());
+                        num2 = Float.parseFloat(secondInput.getText().toString());
+                        num2 = (float)((int)( num2 *100f ))/100f;
+
+                        firstInput.setText(num2.toString());
                         secondInput.setText("");
                     }
                     curOperator.setText("-");
@@ -306,7 +313,10 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                     // If this is the first input, push it to the first Text Window
                     // Clean up the second text window
                     if (firstInput.getText().length() == 0) {
-                        firstInput.setText(secondInput.getText());
+                        num2 = Float.parseFloat(secondInput.getText().toString());
+                        num2 = (float)((int)( num2 *100f ))/100f;
+
+                        firstInput.setText(num2.toString());
                         secondInput.setText("");
                     }
                     curOperator.setText("*");
@@ -322,7 +332,10 @@ public class SimpleCalculatorActivity extends ActionBarActivity {
                     // If this is the first input, push it to the first Text Window
                     // Clean up the second text window
                     if (firstInput.getText().length() == 0) {
-                        firstInput.setText(secondInput.getText());
+                        num2 = Float.parseFloat(secondInput.getText().toString());
+                        num2 = (float)((int)( num2 *100f ))/100f;
+
+                        firstInput.setText(num2.toString());
                         secondInput.setText("");
                     }
                     curOperator.setText("/");
