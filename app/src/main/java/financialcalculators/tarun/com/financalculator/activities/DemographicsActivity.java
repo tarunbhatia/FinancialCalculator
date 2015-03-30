@@ -22,9 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -112,6 +116,11 @@ public class DemographicsActivity extends ActionBarActivity {
         @Override
         public void onActivityCreated(Bundle savedInstanceBundle) {
             super.onActivityCreated(savedInstanceBundle);
+            //Code for adding adds
+            AdView mAdView = (AdView) getActivity().findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice("618cd2d5").build();
+            mAdView.loadAd(adRequest);
+
             gpsEnableButton = (Button) getActivity().findViewById(id.GPSButton);
             gpsEnableButton.setOnClickListener(this);
             calculateButton = (Button) getActivity().findViewById(id.calculateButton);
@@ -135,6 +144,7 @@ public class DemographicsActivity extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             TextView getZipCodeTextView = (TextView) getActivity().findViewById(id.editTextViewZip);
+            EditText getAddressEditTextView = (EditText) getActivity().findViewById(id.addressEditText);
             Boolean flag;
 
             try {
@@ -146,7 +156,6 @@ public class DemographicsActivity extends ActionBarActivity {
                             locationListener = new LocationListener() {
                                 @Override
                                 public void onLocationChanged(Location loc) {
-
                                     pb.setVisibility(View.INVISIBLE);
 
                                     /*----------to get ZipCode from coordinates ------------- */
@@ -161,10 +170,8 @@ public class DemographicsActivity extends ActionBarActivity {
                                             if (item.zip > 0 && item.zip <= 100000) {
                                                 pb.setVisibility(View.INVISIBLE);
                                                 new DemographicsURLParserHelper().execute(item);
-
                                             }
                                         }
-
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -190,25 +197,90 @@ public class DemographicsActivity extends ActionBarActivity {
                         else{
                             alertbox();
                         }
-
                         break;
                     case id.calculateButton:
-                        if (getZipCodeTextView != null && !getZipCodeTextView.getText().toString().isEmpty()) {
+                        pb.setVisibility(View.VISIBLE);
+                        //If both zipCode and Address is not empty, clear everything
+                        if(getZipCodeTextView != null && !getZipCodeTextView.getText().toString().isEmpty()
+                                && getAddressEditTextView != null && !getAddressEditTextView.getText().toString().isEmpty()){
+                            Toast.makeText(getActivity(), "Please Enter either proper zip code or address to get started",
+                                    Toast.LENGTH_SHORT).show();
+                            getZipCodeTextView.setText("");
+                            getAddressEditTextView.setText("");
+                        }
+                        //If zipCode is not empty
+                        else if (getZipCodeTextView != null && !getZipCodeTextView.getText().toString().isEmpty()
+                                && getAddressEditTextView != null && getAddressEditTextView.getText().toString().isEmpty()) {
                             String zipCode = getZipCodeTextView.getText().toString();
                             item.zip = Integer.parseInt(zipCode);
-                        }
-                        try {
-                            if(item.zip>0 && item.zip <=100000){
-                                new DemographicsURLParserHelper().execute(item);
-                            }
-                            else{
-                                Toast.makeText(getActivity(), "Please Enter proper zip code to get started",
-                                        Toast.LENGTH_SHORT).show();
-                                getZipCodeTextView.setText("");
-                            }
+                            try {
+                                if(item.zip>0 && item.zip <=100000){
+                                    new DemographicsURLParserHelper().execute(item);
+                                    pb.setVisibility(View.INVISIBLE);
+                                }
+                                else{
+                                    Toast.makeText(getActivity(), "Please Enter proper zip code to get started",
+                                            Toast.LENGTH_SHORT).show();
+                                    getZipCodeTextView.setText("");
+                                }
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        //If Address is not empty
+                        else if(getZipCodeTextView != null && getZipCodeTextView.getText().toString().isEmpty()
+                                && getAddressEditTextView != null && !getAddressEditTextView.getText().toString().isEmpty()){
+                            Address address = new Address(Locale.US);
+                            Geocoder geocoder = new Geocoder(getActivity().getBaseContext(),
+                                    Locale.getDefault());
+                            address.setAddressLine(0, getAddressEditTextView.getText().toString());
+                            try {
+                                List<Address> addresses = geocoder.getFromLocationName(getAddressEditTextView.getText().toString(), 1);
+
+                                if(addresses.size() > 0 && addresses.get(0)!=null){
+                                    //If we got the postal code great, move on
+                                    if(addresses.get(0).getPostalCode() != null) {
+                                        try {
+                                            item.zip = Integer.parseInt(addresses.get(0).getPostalCode());
+                                        } catch (NumberFormatException e){
+                                            e.printStackTrace();
+                                            pb.setVisibility(View.INVISIBLE);
+                                            TextView textView = (TextView) getActivity().findViewById(id.showResultTextView);
+                                            textView.setText("Postal code not recognized");
+                                            getAddressEditTextView.setText("");
+                                        }
+                                    }
+                                    //Otherwise try to get it from longitude and latitude if that's available
+                                    else if(addresses.get(0).getLatitude()!=0 && addresses.get(0).getLongitude()!=0){
+                                        List <Address> addresses2 = geocoder.getFromLocation(addresses.get(0).getLatitude(),
+                                                addresses.get(0).getLongitude(), 1);
+                                        if ((addresses2.size() > 0) && (addresses2.get(0).getPostalCode() != null)) {
+                                            try {
+                                                item.zip = Integer.parseInt(addresses2.get(0).getPostalCode());
+                                            } catch (NumberFormatException e){
+                                                e.printStackTrace();
+                                                pb.setVisibility(View.INVISIBLE);
+                                                TextView textView = (TextView) getActivity().findViewById(id.showResultTextView);
+                                                textView.setText("Postal code not recognized");
+                                                getAddressEditTextView.setText("");
+                                            }
+                                        }
+                                    }
+                                    //Else apologize for what you've done and clean up
+                                    else{
+                                        Toast.makeText(getActivity(), "Try adding more detail to the address to get started",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                    if (item.zip > 0 && item.zip <= 100000) {
+                                        pb.setVisibility(View.INVISIBLE);
+                                        new DemographicsURLParserHelper().execute(item);
+                                    }
+                                }
+
+                            } catch (Exception e){
+                                e.printStackTrace();
+                            }
                         }
                         break;
                 }

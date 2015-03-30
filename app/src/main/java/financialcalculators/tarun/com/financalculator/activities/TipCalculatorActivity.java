@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import financialcalculators.tarun.com.financalculator.R;
 
 public class TipCalculatorActivity extends ActionBarActivity {
@@ -84,6 +87,11 @@ public class TipCalculatorActivity extends ActionBarActivity {
         @Override
         public void onActivityCreated(Bundle savedInstanceBundle) {
             super.onActivityCreated(savedInstanceBundle);
+            //Code for adding adds
+            AdView mAdView = (AdView) getActivity().findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice("618cd2d5").build();
+            mAdView.loadAd(adRequest);
+
             tipMinusButton = (Button) getActivity().findViewById(R.id.tipButtonMinus);
             tipMinusButton.setOnClickListener(this);
 
