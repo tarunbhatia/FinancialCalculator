@@ -156,7 +156,7 @@ public class DemographicsActivity extends ActionBarActivity {
                                     try {
                                         addresses = gcd.getFromLocation(loc.getLatitude(), loc
                                                 .getLongitude(), 1);
-                                        if (addresses.size() > 0) {
+                                        if ((addresses.size() > 0) && (addresses.get(0).getPostalCode() != null)) {
                                             item.zip = Integer.parseInt(addresses.get(0).getPostalCode());
                                             if (item.zip > 0 && item.zip <= 100000) {
                                                 pb.setVisibility(View.INVISIBLE);

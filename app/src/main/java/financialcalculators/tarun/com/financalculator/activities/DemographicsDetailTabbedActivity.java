@@ -230,8 +230,6 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            Intent intent = getActivity().getIntent();
-            LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
             String[] linksList = {"AFFORDABILITY", "HOMES AND REAL ESTATE", "PEOPLE", "FOR SALE",
                     "FOR SALE BY OWNER", "FORECLOSURES", "RECENTLY SOLD"};
             ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, linksList);

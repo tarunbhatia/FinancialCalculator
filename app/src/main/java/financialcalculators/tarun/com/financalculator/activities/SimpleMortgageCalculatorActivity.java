@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +74,7 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
             View.OnClickListener {
         public MonthlyPaymentItem item = null;
         Button calcButton = null;
+        ProgressBar pb = null;
 
         public SimpleMortgageCalcFragment() {
             calcButton = null;
@@ -91,6 +93,8 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
             super.onActivityCreated(savedInstanceBundle);
             calcButton = (Button) getActivity().findViewById(R.id.calculateButton);
             calcButton.setOnClickListener(this);
+            pb = (ProgressBar) getActivity().findViewById(R.id.progressBar2);
+            pb.setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -99,6 +103,7 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
                     R.id.editTextView);
             TextView getDollarDownTextView = (TextView) getActivity().findViewById(R.id.editTextView2);
             TextView getZipCodeTextView = (TextView) getActivity().findViewById(R.id.editTextView3);
+            pb.setVisibility(View.VISIBLE);
             try{
 
             switch (v.getId()) {
@@ -222,6 +227,7 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
             protected void onPostExecute(MonthlyPaymentItem result) {
                 TextView textView = (TextView) getActivity().findViewById(R.id.showResultTextView);
                 StringBuilder strBuilder = new StringBuilder();
+                pb.setVisibility(View.INVISIBLE);
                 if(item.getCode()==0) {
                     strBuilder.append("$ Down Payment: $").append(Integer.toString(item.getDownPayment())).append("\n");
                     strBuilder.append("30 Yr Fixed Rate: ").append(Float.toString(item.getThirtyYearRate())).append("%").append("\n");
