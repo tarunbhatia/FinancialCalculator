@@ -131,7 +131,6 @@
             android:clickable="false"
             android:scrollbars="vertical"
             android:longClickable="false"
-            android:text="Result"
             android:nestedScrollingEnabled="true" />
     </GridLayout>
     </RelativeLayout>
