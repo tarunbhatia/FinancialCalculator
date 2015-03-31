@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -105,10 +106,13 @@ public class TipCalculatorActivity extends ActionBarActivity {
             splitPlusButton.setOnClickListener(this);
 
             tipAmtTextView = (EditText) getActivity().findViewById(R.id.tipPercEditTextView);
+            tipAmtTextView.setInputType(InputType.TYPE_NULL);
+
             billAmtTextView = (EditText) getActivity().findViewById(R.id.billEditTextView);
             billAmtTextView.setOnClickListener(this);
 
             splitAmtTextView = (EditText) getActivity().findViewById(R.id.splitPercTextView);
+            splitAmtTextView.setInputType(InputType.TYPE_NULL);
 
         }
 

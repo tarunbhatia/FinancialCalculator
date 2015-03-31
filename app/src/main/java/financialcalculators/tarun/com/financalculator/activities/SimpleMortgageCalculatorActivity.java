@@ -130,6 +130,7 @@ public class SimpleMortgageCalculatorActivity extends ActionBarActivity {
                             new ZillowURLParserHelper().execute(item);
                         }
                         else{
+                            pb.setVisibility(View.INVISIBLE);
                             Toast.makeText(getActivity(), "Please Enter Base Price to get started",
                                     Toast.LENGTH_SHORT).show();
                         }

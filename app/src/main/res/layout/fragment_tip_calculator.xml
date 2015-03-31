@@ -73,6 +73,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Split  "
+        android:focusableInTouchMode="true"
+        android:cursorVisible="false"
         android:id="@+id/tipSplitTextView"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tipPercEditTextView" />
@@ -84,6 +86,8 @@
         android:text="2"
         android:editable="false"
         android:id="@+id/splitPercTextView"
+        android:focusableInTouchMode="true"
+        android:cursorVisible="false"
         android:layout_below="@+id/tipPercEditTextView"
         android:layout_alignLeft="@+id/tipPercEditTextView"
         android:layout_alignStart="@+id/tipPercEditTextView"
