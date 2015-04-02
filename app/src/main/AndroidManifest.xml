@@ -24,7 +24,6 @@
             android:screenOrientation="nosensor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -41,12 +40,6 @@
             android:screenOrientation="nosensor" >
         </activity>
         <activity
-            android:name=".activities.SettingsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/action_settings"
-            android:screenOrientation="nosensor" >
-        </activity>
-        <activity
             android:name=".activities.DemographicsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_demographics"
@@ -55,17 +48,25 @@
         <activity
             android:name=".activities.DemographicsDetailTabbedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_demographics_detail_tabbed" >
+            android:label="@string/title_activity_demographics_detail_tabbed"
+            android:screenOrientation="nosensor">
+        </activity>
+        <activity
+            android:name=".activities.TipCalculatorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_tip_calculator"
+            android:screenOrientation="nosensor" >
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="nosensor" >
         </activity>
         <!-- Include the AdActivity configChanges and theme. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-        <activity
-            android:name=".activities.TipCalculatorActivity"
-            android:label="@string/title_activity_tip_calculator" >
-        </activity>
     </application>
-
 </manifest>
