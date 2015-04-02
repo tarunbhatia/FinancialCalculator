@@ -15,6 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import financialcalculators.tarun.com.financalculator.R;
 
 public class SettingsActivity extends ActionBarActivity {
@@ -60,14 +63,11 @@ public class SettingsActivity extends ActionBarActivity {
      */
     public static class SettingsFragment extends Fragment {
 
-        public SettingsFragment() {
-
-        }
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+
             String[] settingsList = {getString(R.string.supporting_libraries),
                     getString(R.string.zillow_copyRightDesc)};
 
@@ -77,6 +77,16 @@ public class SettingsActivity extends ActionBarActivity {
             listView.setAdapter(adapter);
 
             return rootView;
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceBundle) {
+            super.onActivityCreated(savedInstanceBundle);
+
+            //Code for adding adds
+            AdView mAdView = (AdView) getActivity().findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice("618cd2d5").build();
+            mAdView.loadAd(adRequest);
         }
     }
 }
