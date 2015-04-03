@@ -7,7 +7,7 @@
     <string name="simple_calculator">Simple Calculator</string>
     <string name="simple_calculator_desc">A Simple Calculator</string>
     <string name="simple_mortgage">Simple Mortgage Calculator</string>
-    <string name="simple_mortgage_desc">A Simple Mortgage Calculator</string>
+    <string name="simple_mortgage_desc">Calculate your monthly payment based on location, current mortgage rates and other variables</string>
     <string name="title_tip_calculator">Tip Calculator</string>
     <string name="title_tip_calculator_desc">Helps split your check with the number of folks on the table</string>
     <string name="MainActivityFirstImageDesc">Image View</string>
@@ -34,8 +34,8 @@
     <string name="zillow_error_code_fivehundredtwo">Make sure the down or dollarsdown parameter is specified and is a valid integer or Region specified was not found.</string>
     <string name="zillow_error_code_fivehundredthree">Zillow Mortgage Marketplace rate data is currently unavailable. Please come back later and try again.</string>
     <string name="zillow_error_code_fivehundredfive">Incorrect combination of parameters. When querying by zip code, only include the zip parameter.</string>
-    <string name="title_activity_demographics">Local Demographics</string>
-    <string name="title_activity_demographics_desc">Returns a set of market, affordability, real estate, and demographic data</string>
+    <string name="title_activity_demographics">Find Your Home</string>
+    <string name="title_activity_demographics_desc">Helps you find your next house along with affordability, real estate, and other demographic data</string>
     <string name="title_activity_demographics_detail_tabbed">Local Demographics Details</string>
     <string name="title_section1">Region</string>
     <string name="title_section2">Links</string>
