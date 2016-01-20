@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -60,9 +61,11 @@ public class MainActivity extends ActionBarActivity {
             View.OnClickListener {
         TextView firstOption, secondOption, thirdOption, fourthOption = null;
         TextView firstOptionSub, secondOptionSub, thirdOptionSub, fourthOptionSub = null;
+        ImageView firstImage, secondImage, thirdImage, fourthImage = null;
         public PlaceholderFragment() {
             firstOption = secondOption = thirdOption = fourthOption = null;
             firstOptionSub = secondOptionSub = thirdOptionSub = fourthOptionSub = null;
+            firstImage = secondImage = thirdImage = fourthImage = null;
         }
 
         @Override
@@ -86,11 +89,19 @@ public class MainActivity extends ActionBarActivity {
             firstOptionSub = (TextView)getActivity().findViewById(R.id.MainActivityFirstTextSubView);
             firstOptionSub.setOnClickListener(this);
 
+            firstImage = (ImageView) getActivity().findViewById(R.id.MainActivityFirstImageView);
+            //firstImage.setImageResource(R.drawable.ic_launcher);
+            firstImage.setOnClickListener(this);
+
             secondOption = (TextView) getActivity().findViewById(R.id.MainActivitySecondTextView);
             secondOption.setOnClickListener(this);
 
             secondOptionSub = (TextView) getActivity().findViewById(R.id.MainActivitySecondTextSubView);
             secondOptionSub.setOnClickListener(this);
+
+            secondImage = (ImageView) getActivity().findViewById(R.id.MainActivitySecondImageView);
+            //secondImage.setImageResource(R.drawable.ic_launcher);
+            secondImage.setOnClickListener(this);
 
             thirdOption = (TextView) getActivity().findViewById(R.id.MainActivityThirdTextView);
             thirdOption.setOnClickListener(this);
@@ -98,11 +109,19 @@ public class MainActivity extends ActionBarActivity {
             thirdOptionSub = (TextView) getActivity().findViewById(R.id.MainActivityThirdTextSubView);
             thirdOptionSub.setOnClickListener(this);
 
+            thirdImage = (ImageView) getActivity().findViewById(R.id.MainActivityThirdImageView);
+            //thirdImage.setImageResource(R.drawable.ic_launcher);
+            thirdImage.setOnClickListener(this);
+
             fourthOption = (TextView) getActivity().findViewById(R.id.MainActivityFourthTextView);
             fourthOption.setOnClickListener(this);
 
             fourthOptionSub = (TextView) getActivity().findViewById(R.id.MainActivityFourthTextSubView);
             fourthOptionSub.setOnClickListener(this);
+
+            fourthImage = (ImageView) getActivity().findViewById(R.id.MainActivityFourthImageView);
+            //fourthImage.setImageResource(R.drawable.ic_launcher);
+            fourthImage.setOnClickListener(this);
         }
 
 

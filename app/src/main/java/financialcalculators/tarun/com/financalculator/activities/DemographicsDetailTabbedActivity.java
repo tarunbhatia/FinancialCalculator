@@ -190,10 +190,10 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
 
             Intent intent = getActivity().getIntent();
             LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
-            String[] regionList = {"ID - "+ item.region.getRegionId(),
+            String[] regionList = {"HOMES FOR SALE", "ID - "+ item.region.getRegionId(),
                     "STATE - " + item.region.getState(), "CITY - " + item.region.getCity(),
                     "ZIP - " + item.region.getZipCode(), "LATITUDE - " + item.region.getLatitude(),
-                    "LONGITUDE - " + item.region.getLatitude(), "HOMES FOR SALE", "MORE INFO"};
+                    "LONGITUDE - " + item.region.getLatitude(), "MORE INFO"};
             ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, regionList);
             setListAdapter(adapter);
         }
@@ -211,10 +211,10 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
             Intent intent = getActivity().getIntent();
             LocalDemoGraphicsItem item = (LocalDemoGraphicsItem) intent.getExtras().getSerializable("LocalDemoGraphicsItem");
             Intent urlIntent = null;
-            if(pos == 6 && !item.links.getForSale().isEmpty()) {
+            if(pos == 0 && !item.links.getForSale().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForSale()));
                 startActivity(urlIntent);
-            } else if(pos == 6 && item.links.getForSale().isEmpty()) {
+            } else if(pos == 0 && item.links.getForSale().isEmpty()) {
                 Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             }
             else if(pos == 7) {
@@ -237,7 +237,7 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            String[] linksList = {"AFFORDABILITY", "HOMES AND REAL ESTATE", "PEOPLE", "HOMES FOR SALE",
+            String[] linksList = {"AFFORDABILITY", "HOMES AND REAL ESTATE", "PEOPLE",
                     "FOR SALE BY OWNER", "FORECLOSURES", "RECENTLY SOLD"};
             ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, linksList);
             setListAdapter(adapter);
@@ -267,10 +267,6 @@ public class DemographicsDetailTabbedActivity extends ActionBarActivity implemen
             } else if(pos == 2 && !item.links.getPeople().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getPeople()));
             } else if (pos == 2 && item.links.getPeople().isEmpty()){
-                Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
-            } else if(pos == 3 && !item.links.getForSale().isEmpty()) {
-                urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForSale()));
-            } else if (pos == 3 && item.links.getForSale().isEmpty()){
                 Toast.makeText(getActivity(), getString(R.string.zillow_url_not_present), Toast.LENGTH_SHORT).show();
             } else if(pos == 4 && !item.links.getForSaleByOwner().isEmpty()) {
                 urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.links.getForSaleByOwner()));
